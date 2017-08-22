@@ -52,5 +52,9 @@ class ViewController: UIViewController {
         print("current index = \(pageViewController.currentIndex)")
     }
 
+    @IBAction func valueChanged(sender: UISegmentedControl) {
+        
+        pageViewController.scrollToIndex(index: sender.selectedSegmentIndex)
+    }
 }
 

@@ -101,7 +101,6 @@ public class PageViewController: UIPageViewController {
         safeSetViewControllers([controller], direction: direction, animated: animated)
         
         currentIndex = index
-        didScrollToIndex?(currentIndex)
     }
     
     public func removeCurrentController(animated: Bool = true) {

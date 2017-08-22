@@ -8,26 +8,26 @@
 
 import Foundation
 
-extension UIPageViewController {
-    
-    // bug fix for uipageview controller. see http://stackoverflow.com/questions/14220289/removing-a-view-controller-from-uipageviewcontroller
-    // 参考 http://www.jianshu.com/p/3cca93ceee96
-    open func safeSetViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewControllerNavigationDirection, animated: Bool, completion: ((Bool) -> Swift.Void)? = nil) {
-        
-        setViewControllers(viewControllers, direction: direction, animated: animated) { [weak self] finished in
-            
-            guard let `self` = self else {return}
-            
-            // bug fix for uipageview controller. see http://stackoverflow.com/questions/14220289/removing-a-view-controller-from-uipageviewcontroller
-            // 参考 http://www.jianshu.com/p/3cca93ceee96
-            if animated && finished {
-                DispatchQueue.main.async(execute: {
-                    self.setViewControllers(viewControllers, direction: direction, animated: false, completion: nil)
-                })
-            }
-        }
-    }
-}
+//extension UIPageViewController {
+//    
+//    // bug fix for uipageview controller. see http://stackoverflow.com/questions/14220289/removing-a-view-controller-from-uipageviewcontroller
+//    // 参考 http://www.jianshu.com/p/3cca93ceee96
+//    open func safeSetViewControllers(_ viewControllers: [UIViewController]?, direction: UIPageViewControllerNavigationDirection, animated: Bool, completion: ((Bool) -> Swift.Void)? = nil) {
+//        
+//        setViewControllers(viewControllers, direction: direction, animated: animated) { [weak self] finished in
+//            
+//            guard let `self` = self else {return}
+//            
+//            // bug fix for uipageview controller. see http://stackoverflow.com/questions/14220289/removing-a-view-controller-from-uipageviewcontroller
+//            // 参考 http://www.jianshu.com/p/3cca93ceee96
+//            if animated && finished {
+//                DispatchQueue.main.async(execute: {
+//                    self.setViewControllers(viewControllers, direction: direction, animated: false, completion: nil)
+//                })
+//            }
+//        }
+//    }
+//}
 
 public class PageViewController: UIPageViewController {
     
@@ -98,7 +98,7 @@ public class PageViewController: UIPageViewController {
         }()
         
         let controller = controllers[index]
-        safeSetViewControllers([controller], direction: direction, animated: animated)
+        setViewControllers([controller], direction: direction, animated: animated)
         
         currentIndex = index
     }
@@ -110,7 +110,7 @@ public class PageViewController: UIPageViewController {
         if currentIndex < controllers.count - 1 { // 当前页面不是最后面的一个
             
             let controller = controllers[currentIndex+1]
-            safeSetViewControllers([controller], direction: .forward, animated: animated)
+            setViewControllers([controller], direction: .forward, animated: animated)
             
             controllers.remove(at: currentIndex)
             
@@ -119,7 +119,7 @@ public class PageViewController: UIPageViewController {
             if currentIndex > 0 {
                 
                 let controller = controllers[currentIndex-1]
-                safeSetViewControllers([controller], direction: .reverse, animated: animated)
+                setViewControllers([controller], direction: .reverse, animated: animated)
                 
                 controllers.remove(at: currentIndex)
                 currentIndex = currentIndex - 1

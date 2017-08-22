@@ -1,0 +1,16 @@
+PODS:
+  - PageViewController (0.1.0)
+
+DEPENDENCIES:
+  - PageViewController (from `../`)
+
+EXTERNAL SOURCES:
+  PageViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  PageViewController: 18bd0e5e1ff9777d9113c2d31919b24d6256193a
+
+PODFILE CHECKSUM: 3927c3b08c87a8a4438430c64da457261f2ac587
+
+COCOAPODS: 1.3.0.rc.1

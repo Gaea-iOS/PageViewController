@@ -29,7 +29,7 @@ import Foundation
 //    }
 //}
 
-public class PageViewController: UIPageViewController {
+open class PageViewController: UIPageViewController {
     
     private(set) var controllers: [UIViewController] = []
     
@@ -77,7 +77,7 @@ public class PageViewController: UIPageViewController {
         }
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false

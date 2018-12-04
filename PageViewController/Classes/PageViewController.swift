@@ -33,8 +33,8 @@ public class PageViewController: UIPageViewController {
     
     private(set) var controllers: [UIViewController] = []
     
-    fileprivate var previousIndexs: [Int] = [0]
-    fileprivate var lastPendingIndex: Int = 0
+    private var previousIndexs: [Int] = [0]
+    private var lastPendingIndex: Int = 0
     
     public var currentController: UIViewController? {
         guard currentIndex < controllers.count else {return nil}
@@ -45,7 +45,7 @@ public class PageViewController: UIPageViewController {
         return controllers.count
     }
     
-    public fileprivate(set) var currentIndex: Int = 0 {
+    public private(set) var currentIndex: Int = 0 {
         didSet {
             navigationController?.interactivePopGestureRecognizer?.isEnabled = (currentIndex == 0)
         }
@@ -55,7 +55,7 @@ public class PageViewController: UIPageViewController {
     
     public var isScrollEnabled: Bool = true {
         didSet {
-            view.subviews.flatMap({ $0 as? UIScrollView}).forEach({$0.isScrollEnabled = isScrollEnabled})
+            view.subviews.compactMap({ $0 as? UIScrollView}).forEach({$0.isScrollEnabled = isScrollEnabled})
         }
     }
     
@@ -66,7 +66,7 @@ public class PageViewController: UIPageViewController {
     public convenience init(controllers: [UIViewController], interPageSpacing: CGFloat = 0.0) {
         self.init(transitionStyle: .scroll,
                   navigationOrientation: .horizontal,
-                  options: [UIPageViewControllerOptionInterPageSpacingKey: interPageSpacing])
+                  options: [.interPageSpacing: interPageSpacing])
         
         self.controllers = controllers
         
@@ -93,7 +93,7 @@ public class PageViewController: UIPageViewController {
         
         guard index >= 0 && index < controllers.count else {return}
         
-        let direction: UIPageViewControllerNavigationDirection = {
+        let direction: UIPageViewController.NavigationDirection = {
             if index < currentIndex  {
                 return .reverse
             } else {

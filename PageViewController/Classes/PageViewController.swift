@@ -45,7 +45,7 @@ public class PageViewController: UIPageViewController {
         return controllers.count
     }
     
-    public private(set) var currentIndex: Int = 0 {
+    @objc dynamic public private(set) var currentIndex: Int = 0 {
         didSet {
             navigationController?.interactivePopGestureRecognizer?.isEnabled = (currentIndex == 0)
         }

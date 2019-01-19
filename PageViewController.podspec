@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PageViewController'
-  s.version          = '0.8'
+  s.version          = '0.8.2'
   s.summary          = 'A short description of PageViewController.'
 
 # This description is used to generate tags and improve search results.
